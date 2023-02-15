@@ -26,6 +26,8 @@ const dispatch = useDispatch();
     fetchPhotos()
   }, [])
 
+
+
   return (
     <div className="App">
       <ContentArea />

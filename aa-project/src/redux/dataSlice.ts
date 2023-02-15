@@ -8,6 +8,8 @@ const initialState: DataState = {
   value: [],
 };
 
+
+
 export const dataSlice = createSlice({
   name: 'data',
   initialState,

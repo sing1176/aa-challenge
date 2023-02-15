@@ -1,12 +1,29 @@
 import React from 'react';
 import '../../src/App.css';
-import Photo from './Photo';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector
+ } from 'react-redux';
+
+import { useState, useEffect } from 'react';
 
 const ContentArea = () => {
 
+const [imgArray, setImgArray] = useState([]);
 
 const data = useSelector((state: any) => state.data);
+
+
+useEffect(() => {
+  setImgArray(data.value)
+}, [])
+
+const convertBytesToMegabytes = (bytes: number) => {
+	let megabytes = bytes / (1024 * 1024);
+	return megabytes.toFixed(1);
+};
+
+const handleClick = (e: any) => {
+	console.log(e.target.id);
+};
 
 
 	return (
@@ -24,11 +41,20 @@ const data = useSelector((state: any) => state.data);
 				</ul>
 			</nav>
 
-      <div className="photoGrid">
-        {data.value.map((photo: any) => (
-          <Photo key={photo.id} photo={photo} />
-        ))}
-        </div>
+			<div className="photoGrid">
+				{imgArray.map((item: any) => (
+					<div className="imageCard">
+						<img
+							onClick={handleClick}
+							id={item.id}
+							src={item.url}
+							alt={item.title}
+						/>
+						<h4 className="imgTitle">{item.filename}</h4>
+						<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
