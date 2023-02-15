@@ -36,6 +36,16 @@ a{
   color:  #717171;
 }
 
+
+.PhotoGrid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0%;
+}
+
 .Sidebar{
   background-color: #ffffff;
   padding: 16px;

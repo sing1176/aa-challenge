@@ -1,31 +1,30 @@
 import './App.css'
-import { useState, useEffect } from 'react';
-
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import ContentArea from './components/ContentArea';
+import { setData } from './redux/dataSlice';
+
 function App() {
 
-  const [photos, setPhotos] = useState([])
-
-
 const url = 'https://agencyanalytics-api.vercel.app/images.json'
- 
+
+const dispatch = useDispatch();
+
  const fetchPhotos = async () => {
 		try {
 			const response = await fetch(url);
 			const data = await response.json();
-			setPhotos(data);
+      dispatch(setData(data));
+
 		} catch (error) {
 			console.error(error);
 		}
  };
-
-
+ 
   useEffect(() => {
     fetchPhotos()
   }, [])
-
-
 
   return (
     <div className="App">
