@@ -13,9 +13,9 @@ const convertBytesToMegabytes = (bytes: number) => {
 
 const Photo = (Photo : PhotoProps) => {
 	return (
-		<div>
-			<img className="img" src={Photo.photo.url} alt={Photo.photo.title} />
-			<h3>{Photo.photo.filename}</h3>
+		<div className='imageCard'>
+			<img  src={Photo.photo.url} alt={Photo.photo.title} />
+			<h4 className='imgTitle'>{Photo.photo.filename}</h4>
 			<p>{convertBytesToMegabytes(Photo.photo.sizeInBytes)} MB</p>
 		</div>
 	);

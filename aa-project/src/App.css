@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App{
   background-color: white;
   color: black;
@@ -8,14 +14,17 @@
 
 .ContentArea{
   background-color: #f5f5f5;
-  padding: 16px;
+  padding: 32px;
   min-width: 70%;
   min-height: 100vh;
   border : 1px solid #e0e0e0;
+
 }
 
 .NavBar{
   border-bottom: #e0e0e0 1px solid;
+  margin-top: 32px;
+  padding-bottom: 16px;
 }
 
 ul{
@@ -37,16 +46,40 @@ a{
 }
 
 
-.PhotoGrid{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 0%;
+.photoGrid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+  margin-top: 32px;
+
 }
 
-.Sidebar{
+.imageCard{
+
+width: 200px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+ 
+
+
+.imgTitle{
+ text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+
+img{
+ height: 150px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.sidebar{
   background-color: #ffffff;
   padding: 16px;
   min-height: 100vh;

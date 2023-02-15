@@ -2,7 +2,7 @@ import React from 'react'
 import '../../src/App.css';
 const Sidebar = () => {
   return (
-    <div className='Sidebar' >
+    <div className='sidebar' >
       <h2></h2>
     </div>
   )

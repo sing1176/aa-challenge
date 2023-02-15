@@ -24,7 +24,7 @@ const data = useSelector((state: any) => state.data);
 				</ul>
 			</nav>
 
-      <div className="PhotoGrid">
+      <div className="photoGrid">
         {data.value.map((photo: any) => (
           <Photo key={photo.id} photo={photo} />
         ))}
