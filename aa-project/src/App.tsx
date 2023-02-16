@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import ContentArea from './components/ContentArea';
 import { setData, setSelected } from './redux/dataSlice';
@@ -26,8 +26,6 @@ const dispatch = useDispatch();
   useEffect(() => {
     fetchPhotos()
   }, [])
-
-
 
   return (
     <div className="App">
