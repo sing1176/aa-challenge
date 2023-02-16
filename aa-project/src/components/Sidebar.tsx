@@ -32,7 +32,7 @@ const Sidebar = () => {
   });
 
   const data = useSelector((state: any) => state.data);
-
+s
   const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
   
