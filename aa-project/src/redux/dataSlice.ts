@@ -4,12 +4,14 @@ export interface DataState {
   value: [];
   selectedImageId: string | null;
   favoriteImages: string[];
+  selectedTab: string;
 }
 
 const initialState: DataState = {
   value: [],
   selectedImageId: null,
   favoriteImages: [],
+  selectedTab: 'Recently added',
 };
 
 
@@ -28,11 +30,14 @@ export const dataSlice = createSlice({
 		},
     setFavorite: (state, action: PayloadAction<string>) => {
       state.favoriteImages.push(action.payload);
+    },
+   setTab: (state, action: PayloadAction<string>) => {
+      state.selectedTab = action.payload;
     }
 	},
 });
 
-export const { setData, setSelected, setFavorite } = dataSlice.actions;
+export const { setData, setSelected, setFavorite , setTab} = dataSlice.actions;
 
 export default dataSlice.reducer;
 

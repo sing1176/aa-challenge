@@ -75,22 +75,21 @@ const Sidebar = () => {
 
 
   const handleSave = () => {
-    if(favoriteImages.includes(item.id)) {
-      console.log('already in fav');
-      return
-    } else {
-      dispatch(setFavorite(item.id))
-      setIsFav(true)
-      console.log(favoriteImages);
-    }
+    if (favoriteImages.includes(selectedId)) {
+			console.log('already in fav');
+			return;
+		} else {
+			dispatch(setFavorite(selectedId ));
+			setIsFav(true);
+			console.log(favoriteImages);
+		}
   }
 
   const handleDelete = () => {
-    const filteredData = data.value.filter((item: any) => item.id !== selectedId);
-    dispatch(setData(filteredData))
+		const filteredData = data.value.filter((item: any) => item.id !== selectedId)
+    dispatch(setData(filteredData));
 		setItem(null)
   }
-
 
 
 
