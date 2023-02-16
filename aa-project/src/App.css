@@ -215,3 +215,11 @@ margin: 0px;
   justify-content: center;
  
 }
+
+
+
+.selectedTab{
+  color: rgb(102, 18, 237);
+  border-bottom: rgb(102, 18, 237) 2px solid;
+  padding-bottom: 17px;
+}
