@@ -83,6 +83,7 @@ const Sidebar = () => {
   const handleDelete = () => {
     const filteredData = data.value.filter((item: any) => item.id !== selectedId);
     dispatch(setData(filteredData))
+		setItem(null)
   }
 
 
@@ -158,6 +159,18 @@ const Sidebar = () => {
 					</div>
 				</div>
 			)}
+
+			{!item && (
+				<div className='sidebar'>
+					<div className='noSidebar'>
+					<h3>Nothing to show</h3>
+					<p>Select an image to view details</p>
+					</div>
+				</div>
+			)}
+
+
+
 		</>
 	);
 };

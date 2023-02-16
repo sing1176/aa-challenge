@@ -206,3 +206,12 @@ margin: 0px;
   background-color: rgb(253, 86, 86);
   color: white;
 }
+
+.noSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+ 
+}
