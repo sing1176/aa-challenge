@@ -54,6 +54,49 @@ a{
 
 }
 
+@media screen and (max-width: 1200px) {
+  .photoGrid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .photoGrid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ContentArea{
+    min-width: 50%;
+  }
+
+  .sidebar{
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .photoGrid{
+    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar{
+    display: none;
+  }
+
+
+  .NavBar{
+    font-size: small;
+  }
+
+  .ContentArea{
+    min-width: 100%;
+  }
+}
+
 .imageCard{
 
 width: 200px;
@@ -215,7 +258,6 @@ margin: 0px;
   justify-content: center;
  
 }
-
 
 
 .selectedTab{

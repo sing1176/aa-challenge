@@ -14,6 +14,8 @@ const ContentArea = () => {
   const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
 	const dispatch = useDispatch();
+
+  const [selectedTab, setSelectedTab] = useState('recently added')
   
 
 	useEffect(() => {
@@ -32,9 +34,11 @@ const ContentArea = () => {
 
 const handleTabClick = (e: any) => {
   if (e.target.innerText === 'favourites') {
+    setSelectedTab('favourites')
     const favImages = data.value.filter((item: any) => favoriteImages.includes(item.id))
     setImgArray(favImages)
   }else {
+    setSelectedTab('recently added')
     setImgArray(data.value)
   }
 };
@@ -49,12 +53,18 @@ const handleTabClick = (e: any) => {
 				<nav className="NavBar">
 					<ul>
 						<li>
-							<a onClick={handleTabClick} href="#">
+							<a onClick={handleTabClick} className={
+                selectedTab === 'recently added' ? 'selectedTab' : ''
+              } href="#">
 								Recently added
 							</a>
 						</li>
 						<li>
-							<a onClick={handleTabClick} href="#">
+							<a onClick={handleTabClick} 
+              className={
+                selectedTab === 'favourites' ? 'selectedTab' : ''
+              }
+              href="#">
 								favourites
 							</a>
 						</li>
