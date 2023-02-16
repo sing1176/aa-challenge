@@ -53,18 +53,22 @@ const handleTabClick = (e: any) => {
 				<nav className="NavBar">
 					<ul>
 						<li>
-							<a onClick={handleTabClick} className={
-                selectedTab === 'recently added' ? 'selectedTab' : ''
-              } href="#">
+							<a
+								onClick={handleTabClick}
+								className={
+									selectedTab === 'recently added' ? 'selectedTab' : ''
+								}
+								href="#"
+							>
 								Recently added
 							</a>
 						</li>
 						<li>
-							<a onClick={handleTabClick} 
-              className={
-                selectedTab === 'favourites' ? 'selectedTab' : ''
-              }
-              href="#">
+							<a
+								onClick={handleTabClick}
+								className={selectedTab === 'favourites' ? 'selectedTab' : ''}
+								href="#"
+							>
 								favourites
 							</a>
 						</li>
@@ -72,6 +76,12 @@ const handleTabClick = (e: any) => {
 				</nav>
 
 				<div className="photoGrid">
+					{favoriteImages.length === 0 && selectedTab === 'favourites' && (
+						<div className="noFavImages">
+							<p> There are no fav images yet</p>
+						</div>
+					)}
+
 					{imgArray.map((item: any) => (
 						<div className="imageCard" key={item.id}>
 							<img
@@ -79,7 +89,7 @@ const handleTabClick = (e: any) => {
 								id={item.id}
 								src={item.url}
 								alt={item.title}
-                className={selectedId === item.id ? 'selected' : ''}
+								className={selectedId === item.id ? 'selected' : ''}
 							/>
 							<h4 className="imgTitle">{item.filename}</h4>
 							<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
