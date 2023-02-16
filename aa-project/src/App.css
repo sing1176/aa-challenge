@@ -93,6 +93,12 @@ border: 2px solid rgb(102, 18, 237);
   border-radius: 16px;
 }
 
+.selected:hover{
+border: 2px solid rgb(102, 18, 237);
+  padding: 4px;
+  border-radius: 16px;
+}
+
 
 
 .sidebar{

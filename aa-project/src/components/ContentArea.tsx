@@ -6,10 +6,11 @@ import { useState, useEffect } from 'react';
 
 const ContentArea = () => {
 	const [imgArray, setImgArray] = useState([]);
-
 	const data = useSelector((state: any) => state.data);
 
   const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
+
+  const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
 	const dispatch = useDispatch();
   
@@ -27,6 +28,7 @@ const ContentArea = () => {
 		dispatch(setSelected(e.target.id));
 	};
 
+
 const handleTabClick = (e: any) => {
   if (e.target.innerText === 'favourites') {
     
@@ -38,8 +40,6 @@ const handleTabClick = (e: any) => {
   }
 };
 
-
-  
 
 
 	return (
@@ -70,6 +70,7 @@ const handleTabClick = (e: any) => {
 								id={item.id}
 								src={item.url}
 								alt={item.title}
+                className={selectedId === item.id ? 'selected' : ''}
 							/>
 							<h4 className="imgTitle">{item.filename}</h4>
 							<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
