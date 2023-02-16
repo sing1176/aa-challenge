@@ -144,19 +144,21 @@ border: 2px solid rgb(102, 18, 237);
 
 
 
-.sidebar{
+.sidebar {
   background-color: #ffffff;
   padding: 32px;
   min-height: 100vh;
+  height: 100%;
   width: 30%;
   min-width: 30%;
   max-width: 30%;
 }
 
-.sidebarCard{
+.sidebarCard {
   width: 100%;
+  position: sticky;
+  top: 36px;
 }
-
 .sideImg{
   width: 100%;
   min-height: 260px;
