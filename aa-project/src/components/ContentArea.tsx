@@ -3,53 +3,21 @@ import '../../src/App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelected, setFavrouite } from '../redux/dataSlice';
 import { useState, useEffect } from 'react';
+import RecentlyAddedTab from '../components/RecentlyAddedTab';
 
 const ContentArea = () => {
-	const [imgArray, setImgArray] = useState([]);
-
-	const data = useSelector((state: any) => state.data);
-
-  const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
-
-  const selectedId = useSelector((state: any) => state.data.selectedImageId);
-
-	const dispatch = useDispatch();
-
-  const [selectedTab, setSelectedTab] = useState('recently added')
-  
+	const [selectedTab, setSelectedTab] = useState('recently added');
 
 	useEffect(() => {
-		setImgArray(data.value);
-	}, [data.value]);
+		setSelectedTab('recently added');
+	}, []);
 
-	const convertBytesToMegabytes = (bytes: number) => {
-		let megabytes = bytes / (1024 * 1024);
-		return megabytes.toFixed(1);
-	};
-
-	const handleClick = (e: any) => {
-		dispatch(setSelected(e.target.id));
-	};
-
-
-const handleTabClick = (e: any) => {
-  if (e.target.innerText === 'favourites') {
-    setSelectedTab('favourites')
-    const favImages = data.value.filter((item: any) => favoriteImages.includes(item.id))
-    setImgArray(favImages)
-  }else {
-    setSelectedTab('recently added')
-    setImgArray(data.value)
-  }
-};
-
-
+	const handleTabClick = (e: any) => {};
 
 	return (
 		<>
 			<div className="ContentArea">
 				<h2>Photos</h2>
-
 				<nav className="NavBar">
 					<ul>
 						<li>
@@ -74,28 +42,7 @@ const handleTabClick = (e: any) => {
 						</li>
 					</ul>
 				</nav>
-
-				<div className="photoGrid">
-					{favoriteImages.length === 0 && selectedTab === 'favourites' && (
-						<div className="noFavImages">
-							<p> There are no fav images yet</p>
-						</div>
-					)}
-
-					{imgArray.map((item: any) => (
-						<div className="imageCard" key={item.id}>
-							<img
-								onClick={handleClick}
-								id={item.id}
-								src={item.url}
-								alt={item.title}
-								className={selectedId === item.id ? 'selected' : ''}
-							/>
-							<h4 className="imgTitle">{item.filename}</h4>
-							<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
-						</div>
-					))}
-				</div>
+				<RecentlyAddedTab />
 			</div>
 		</>
 	);
