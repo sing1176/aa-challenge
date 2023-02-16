@@ -100,6 +100,8 @@ border: 2px solid rgb(102, 18, 237);
   padding: 32px;
   min-height: 100vh;
   width: 30%;
+  min-width: 30%;
+  max-width: 30%;
 }
 
 .sidebarCard{

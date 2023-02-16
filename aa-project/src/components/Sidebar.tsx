@@ -32,7 +32,7 @@ const Sidebar = () => {
   });
 
   const data = useSelector((state: any) => state.data);
-s
+
   const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
   
@@ -63,8 +63,8 @@ return formattedDate;
 }
 
 
-  return (
-		<div className="sidebar">
+ return <>
+    {item && <div className="sidebar">
 			<div className="sidebarCard">
 				<img className="sideImg" id={item.id} src={item.url} alt={item.title} />
 				<div className="headerBar">
@@ -80,12 +80,12 @@ return formattedDate;
 						strokeWidth={1.5}
 						stroke="currentColor"
 						className="heartIcon"
-					>
+            >
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-						/>
+              />
 					</svg>
 				</div>
 
@@ -105,24 +105,24 @@ return formattedDate;
 					</div>
 					<div>
 						<h6>Dimensions</h6>
-						<p className="dimensions">
+						<section className="dimensions">
 							<p>{item.dimensions.height.toString()}</p>x
 							<p>{item.dimensions.width.toString()}</p>
-						</p>
+						</section>
 					</div>
 					<div>
 						<h6>Resolution</h6>
-						<p className="dimensions">
+						<section className="dimensions">
 							<p>{item.resolution.height.toString()}</p>x
 							<p>{item.resolution.width.toString()}</p>
-						</p>
+						</section>
 					</div>
 					<h4 className='description'>Description</h4>
           <p className='desText'>{item.description}</p>
 				</div>
 			</div>
-		</div>
-	);
+		</div>}
+              </>
 }
 
 export default Sidebar
