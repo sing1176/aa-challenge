@@ -5,11 +5,13 @@ export interface DataState {
   selectedImageId: string | null;
   favoriteImages: string[];
   selectedTab: string;
+  selectedImage: any;
 }
 
 const initialState: DataState = {
   value: [],
   selectedImageId: null,
+  selectedImage: null,
   favoriteImages: [],
   selectedTab: 'Recently added',
 };
@@ -33,11 +35,15 @@ export const dataSlice = createSlice({
     },
    setTab: (state, action: PayloadAction<string>) => {
       state.selectedTab = action.payload;
+    },
+    setSelectedImage: (state, action: PayloadAction<any>) => {
+      state.selectedImage = action.payload;
     }
 	},
 });
 
-export const { setData, setSelected, setFavorite , setTab} = dataSlice.actions;
+export const { setData, setSelected, setFavorite, setTab, setSelectedImage } =
+	dataSlice.actions;
 
 export default dataSlice.reducer;
 

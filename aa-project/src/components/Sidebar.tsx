@@ -1,7 +1,7 @@
 import '../../src/App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setFavorite, setData } from '../redux/dataSlice';
+import { setFavorite, setData, setSelectedImage } from '../redux/dataSlice';
 
 
 interface IItem {
@@ -31,32 +31,20 @@ interface IItem {
 
 const Sidebar = () => {
 
-	const [item, setItem] = useState<IItem | null>(null);
-
-  const [isFav, setIsFav] = useState(false)
-
 	const dispatch = useDispatch();
 
 	const data = useSelector((state: any) => state.data);
 
   const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
 
-	const selectedId = useSelector((state: any) => state.data.selectedImageId);
+	const selectedImage = useSelector((state: any) => state.data.selectedImage);
 
-	const selectedImage = data.value.find(
-		(item: any) => item.id === selectedId
-	);
+	
+	const checkIfFav = () => {
+		return favoriteImages.includes(selectedImage.id)
+	};
 
-
-	useEffect(() => {
-		setItem(selectedImage);
-    if(favoriteImages.includes(selectedImage.id)) {
-      setIsFav(true)
-    } else {
-      setIsFav(false)
-    }
-
-	}, [selectedId]);
+	
 
 	const convertBytesToMegabytes = (bytes: number) => {
 		let megabytes = bytes / (1024 * 1024);
@@ -76,53 +64,50 @@ const Sidebar = () => {
 
 
   const handleSave = () => {
-    if (favoriteImages.includes(selectedId)) {
+    if (favoriteImages.includes(selectedImage.id)) {
 			console.log('already in fav');
 			return;
 		} else {
-			dispatch(setFavorite(selectedId ));
-			setIsFav(true);
-			console.log(favoriteImages);
+			dispatch(setFavorite(selectedImage.id));
 		}
   }
 
   const handleDelete = () => {
-		const filteredData = data.value.filter((item: any) => item.id !== selectedId)
+		const filteredData = data.value.filter((item: any) => item.id !== selectedImage.id)
 
-		const filteredFav = favoriteImages.filter((item: any) => item !== selectedId)
-
+		const filteredFav = favoriteImages.filter((item: any) => item !== 
+		selectedImage.id	)
     dispatch(setData(filteredData));
 		dispatch(setFavorite(filteredFav));
-		setItem(null)
+		dispatch(setSelectedImage(''));
   }
-
 
 
 	return (
 		<>
-			{item && (
+			{selectedImage ? (
 				<div className="sidebar">
 					<div className="sidebarCard">
 						<img
 							className="sideImg"
-							id={item.id}
-							src={item.url}
-							alt={item.title}
+							id={selectedImage.id}
+							src={selectedImage.url}
+							alt={selectedImage.title}
 						/>
 						<div className="headerBar">
 							<div className="headerInfo">
-								<h4 className="imgTitle">{item.filename}</h4>
-								<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
+								<h4 className="imgTitle">{selectedImage.filename}</h4>
+								<p>{convertBytesToMegabytes(selectedImage.sizeInBytes)} MB</p>
 							</div>
 							<button onClick={handleSave} className="saveBtn">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									fill={isFav ? 'rgb(102, 18, 237' : 'none'}
+									fill={checkIfFav() ? 'rgb(102, 18, 237' : 'none'}
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
 									className="heartIcon"
-									id={item.id}
+									id={selectedImage.id}
 								>
 									<path
 										strokeLinecap="round"
@@ -137,45 +122,45 @@ const Sidebar = () => {
 							<h4>Information</h4>
 							<div>
 								<h6>Uploaded by</h6>
-								<p>{item.uploadedBy}</p>
+								<p>{selectedImage.uploadedBy}</p>
 							</div>
 							<div>
 								<h6>Created</h6>
-								<p>{convertToDate(item.createdAt)}</p>
+								<p>{convertToDate(selectedImage.createdAt)}</p>
 							</div>
 							<div>
 								<h6>Last Modified</h6>
-								<p>{convertToDate(item.updatedAt)}</p>
+								<p>{convertToDate(selectedImage.updatedAt)}</p>
 							</div>
 							<div>
 								<h6>Dimensions</h6>
 								<section className="dimensions">
-									<p>{item.dimensions.height.toString()}</p>x
-									<p>{item.dimensions.width.toString()}</p>
+									<p>{selectedImage.dimensions.height.toString()}</p>x
+									<p>{selectedImage.dimensions.width.toString()}</p>
 								</section>
 							</div>
 							<div>
 								<h6>Resolution</h6>
 								<section className="dimensions">
-									<p>{item.resolution.height.toString()}</p>x
-									<p>{item.resolution.width.toString()}</p>
+									<p>{selectedImage.resolution.height.toString()}</p>x
+									<p>{selectedImage.resolution.width.toString()}</p>
 								</section>
 							</div>
 							<h4 className="description">Description</h4>
-							<p className="desText">{item.description}</p>
-              <button onClick={handleDelete} className='dltBtn'>Delete</button>
+							<p className="desText">{selectedImage.description}</p>
+							<button onClick={handleDelete} className="dltBtn">
+								Delete
+							</button>
 						</div>
 					</div>
 				</div>
-			)}
-
-			{!item && (
-				<div className='sidebar'>
-					<div className='noSidebar'>
-					<h3>Nothing to show</h3>
-					<p>Select an image to view details</p>
+			) : (
+				<div className="sidebar">
+					<div className="sidebarCard">
+						<h4 className="noImg">No Image Selected</h4>
 					</div>
 				</div>
+
 			)}
 		</>
 	);

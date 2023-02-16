@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setSelected } from '../redux/dataSlice';
+import { setSelected, setSelectedImage } from '../redux/dataSlice';
 
 interface DataInterface {
 	id: string;
@@ -31,6 +31,8 @@ const RecentlyAddedTab = () => {
 
 	const data = useSelector((state: any) => state.data);
 
+  const selectedImage = useSelector((state: any) => state.data.selectedImage);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -38,14 +40,13 @@ const RecentlyAddedTab = () => {
 			return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
 		});
 		setImgArray(sortedArray);
-    dispatch(setSelected(sortedArray[0].id));
-    
+    dispatch(setSelectedImage(sortedArray[0]));
 	}, [data.value]);
 
-	const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
 	const handleClick = (e: any) => {
-		dispatch(setSelected(e.target.id));
+		const selectedImage = imgArray.find((item: any) => item.id === e.target.id);
+		dispatch(setSelectedImage(selectedImage));
 	};
 
 	const convertBytesToMegabytes = (bytes: number) => {
@@ -59,11 +60,11 @@ const RecentlyAddedTab = () => {
 				{imgArray.map((item: any) => (
 					<div className="imageCard" key={item.id}>
 						<img
-							onClick={handleClick}
 							id={item.id}
 							src={item.url}
 							alt={item.title}
-							className={selectedId === item.id ? 'selected' : ''}
+							onClick={handleClick}
+							className={selectedImage.id === item.id ? 'selected' : ''}
 						/>
 						<h4 className="imgTitle">{item.filename}</h4>
 						<p>{convertBytesToMegabytes(item.sizeInBytes)} MB</p>
