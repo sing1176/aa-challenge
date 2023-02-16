@@ -1,7 +1,7 @@
 import '../../src/App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setFavorite } from '../redux/dataSlice';
+import { setFavorite, setData } from '../redux/dataSlice';
 
 const Sidebar = () => {
 	const [item, setItem] = useState({
@@ -80,6 +80,13 @@ const Sidebar = () => {
     }
   }
 
+  const handleDelete = () => {
+    const filteredData = data.value.filter((item: any) => item.id !== selectedId);
+    dispatch(setData(filteredData))
+  }
+
+
+
 
 	return (
 		<>
@@ -146,6 +153,7 @@ const Sidebar = () => {
 							</div>
 							<h4 className="description">Description</h4>
 							<p className="desText">{item.description}</p>
+              <button onClick={handleDelete} className='dltBtn'>Delete</button>
 						</div>
 					</div>
 				</div>

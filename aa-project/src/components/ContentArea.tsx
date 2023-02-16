@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 const ContentArea = () => {
 	const [imgArray, setImgArray] = useState([]);
+
 	const data = useSelector((state: any) => state.data);
 
   const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
@@ -17,7 +18,7 @@ const ContentArea = () => {
 
 	useEffect(() => {
 		setImgArray(data.value);
-	}, []);
+	}, [data.value]);
 
 	const convertBytesToMegabytes = (bytes: number) => {
 		let megabytes = bytes / (1024 * 1024);
