@@ -26,7 +26,9 @@ const FavouritesTab = () => {
 
 	return (
 		<div className="photoGrid">
+      {favoriteImages.length === 0 && <h3>No favorites yet <span>😢</span></h3>}
 			{favoriteImages.map((item: any) => (
+
 				<div className="imageCard" key={item.id}>
 					<img
 						onClick={handleClick}
