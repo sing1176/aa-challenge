@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../src/App.css';
-import { useSelector
+import { useSelector, useDispatch
  } from 'react-redux';
-
+import { setSelected } from '../redux/dataSlice';
 import { useState, useEffect } from 'react';
 
 const ContentArea = () => {
@@ -11,6 +11,7 @@ const [imgArray, setImgArray] = useState([]);
 
 const data = useSelector((state: any) => state.data);
 
+const dispatch = useDispatch();
 
 useEffect(() => {
   setImgArray(data.value)
@@ -23,6 +24,7 @@ const convertBytesToMegabytes = (bytes: number) => {
 
 const handleClick = (e: any) => {
 	console.log(e.target.id);
+  dispatch(setSelected(e.target.id));
 };
 
 

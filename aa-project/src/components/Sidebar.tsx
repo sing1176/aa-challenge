@@ -33,13 +33,16 @@ const Sidebar = () => {
 
   const data = useSelector((state: any) => state.data);
 
+  const selectedId = useSelector((state: any) => state.data.selectedImageId);
+
+  
   useEffect(() => {
-    setItem(data.value[0]); 
-    console.log(data.value[0]);
-       
-  }, []);
-
-
+		const selectedImage = data.value.find(
+			(item: any) => item.id === selectedId
+		);
+		setItem(selectedImage);
+	}, [selectedId]);
+ 
 
 
 const convertBytesToMegabytes = (bytes: number) => {
@@ -58,9 +61,6 @@ const formattedDate = `${day} ${monthName}, ${year}`;
 return formattedDate;
 
 }
-
-
-
 
 
   return (

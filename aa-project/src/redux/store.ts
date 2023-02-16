@@ -4,7 +4,7 @@ import dataReducer from "./dataSlice";
 
 export default configureStore({
 	reducer: {
-		data: dataReducer
+		data: dataReducer,
 	}
 });
 
