@@ -13,7 +13,7 @@ const selectedTab = useSelector((state: any) => state.data.selectedTab);
 				<TabNavigation />
         {selectedTab === 'Recently added' ? <RecentlyAddedTab /> : <FavouritesTab />}
 			</div>
-		</>
+		</> 
 	);
 };
 

@@ -43,12 +43,13 @@ const Sidebar = () => {
 
 	const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
-	useEffect(() => {
-		const selectedImage = data.value.find(
-			(item: any) => item.id === selectedId
-		);
-		setItem(selectedImage);
+	const selectedImage = data.value.find(
+		(item: any) => item.id === selectedId
+	);
 
+
+	useEffect(() => {
+		setItem(selectedImage);
     if(favoriteImages.includes(selectedImage.id)) {
       setIsFav(true)
     } else {
@@ -176,9 +177,6 @@ const Sidebar = () => {
 					</div>
 				</div>
 			)}
-
-
-
 		</>
 	);
 };
