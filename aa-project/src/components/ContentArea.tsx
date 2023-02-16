@@ -32,12 +32,10 @@ const ContentArea = () => {
 
 const handleTabClick = (e: any) => {
   if (e.target.innerText === 'favourites') {
-    
-    imgArray.filter((item: any) => item.id === favoriteImages);
-
-    setImgArray(favoriteImages);
-  } else {
-    setImgArray(data.value);
+    const favImages = data.value.filter((item: any) => favoriteImages.includes(item.id))
+    setImgArray(favImages)
+  }else {
+    setImgArray(data.value)
   }
 };
 

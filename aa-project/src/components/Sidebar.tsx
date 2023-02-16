@@ -3,30 +3,35 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { setFavorite, setData } from '../redux/dataSlice';
 
-const Sidebar = () => {
-	const [item, setItem] = useState({
-		id: '',
-		title: '',
-		url: '',
-		filename: '',
-		description: '',
-		sizeInBytes: 0,
-		uploadedBy: '',
-		createdAt: '',
-		favorited: false,
-		fileName: '',
-		resolution: {
-			width: Number,
-			height: Number,
-		},
-		dimensions: {
-			width: Number,
-			height: Number,
-		},
 
-		sharedWith: [],
-		updatedAt: '',
-	});
+interface IItem {
+	id: string;
+	title: string;
+	url: string;
+	filename: string;
+	description: string;
+	sizeInBytes: number;
+	uploadedBy: string;
+	createdAt: string;
+	favorited: boolean;
+	fileName: string;
+	resolution: {
+		width: number;
+		height: number;
+	};
+	dimensions: {
+		width: number;
+		height: number;
+	};
+
+	sharedWith: [];
+	updatedAt: string;
+}
+
+
+const Sidebar = () => {
+
+	const [item, setItem] = useState<IItem | null>(null);
 
   const [isFav, setIsFav] = useState(false)
 
