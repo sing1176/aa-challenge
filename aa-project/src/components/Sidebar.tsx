@@ -87,7 +87,11 @@ const Sidebar = () => {
 
   const handleDelete = () => {
 		const filteredData = data.value.filter((item: any) => item.id !== selectedId)
+
+		const filteredFav = favoriteImages.filter((item: any) => item !== selectedId)
+
     dispatch(setData(filteredData));
+		dispatch(setFavorite(filteredFav));
 		setItem(null)
   }
 

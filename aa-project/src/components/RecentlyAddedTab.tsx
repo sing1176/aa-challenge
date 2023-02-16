@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { setSelected } from '../redux/dataSlice';
@@ -18,7 +17,6 @@ const RecentlyAddedTab = () => {
 
   const selectedId = useSelector((state: any) => state.data.selectedImageId);
 
-  const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
 
   	const handleClick = (e: any) => {
 			dispatch(setSelected(e.target.id));
