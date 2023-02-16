@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import ContentArea from './components/ContentArea';
-import { setData, setSelected } from './redux/dataSlice';
+import { setData} from './redux/dataSlice';
 
 function App() {
 
@@ -16,8 +16,6 @@ const dispatch = useDispatch();
 			const response = await fetch(url);
 			const data = await response.json();
       dispatch(setData(data));
-       dispatch(setSelected(data[0].id));
-
 		} catch (error) {
 			console.error(error);
 		}
