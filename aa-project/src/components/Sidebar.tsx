@@ -28,7 +28,7 @@ const Sidebar = () => {
 		updatedAt: '',
 	});
 
-  const [favorite, setFavorite] = useState(false);
+  const [isFav, setIsFav] = useState(false)
 
 	const dispatch = useDispatch();
 
@@ -43,6 +43,13 @@ const Sidebar = () => {
 			(item: any) => item.id === selectedId
 		);
 		setItem(selectedImage);
+
+    if(favoriteImages.includes(selectedImage.id)) {
+      setIsFav(true)
+    } else {
+      setIsFav(false)
+    }
+
 	}, [selectedId]);
 
 	const convertBytesToMegabytes = (bytes: number) => {
@@ -61,16 +68,17 @@ const Sidebar = () => {
 		return formattedDate;
 	};
 
-	const handleSave = (e: any) => {
 
-    if (favorite) {
-      setFavorite(false);
+  const handleSave = () => {
+    if(favoriteImages.includes(item.id)) {
+      console.log('already in fav');
+      return
     } else {
-      setFavorite(true);
+      dispatch(setFavorite(item.id))
+      setIsFav(true)
+      console.log(favoriteImages);
     }
-
-	};
-
+  }
 
 
 	return (
@@ -92,7 +100,7 @@ const Sidebar = () => {
 							<button onClick={handleSave} className="saveBtn">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									fill={favorite ? 'rgb(102, 18, 237' : 'none'}
+									fill={isFav ? 'rgb(102, 18, 237' : 'none'}
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
