@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../src/App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelected } from '../redux/dataSlice';
+import { setSelected, setFavrouite } from '../redux/dataSlice';
 import { useState, useEffect } from 'react';
 
 const ContentArea = () => {
@@ -9,7 +9,10 @@ const ContentArea = () => {
 
 	const data = useSelector((state: any) => state.data);
 
+  const favoriteImages = useSelector((state: any) => state.data.favoriteImages);
+
 	const dispatch = useDispatch();
+  
 
 	useEffect(() => {
 		setImgArray(data.value);
@@ -24,6 +27,21 @@ const ContentArea = () => {
 		dispatch(setSelected(e.target.id));
 	};
 
+const handleTabClick = (e: any) => {
+  if (e.target.innerText === 'favourites') {
+    
+    imgArray.filter((item: any) => item.id === favoriteImages);
+
+    setImgArray(favoriteImages);
+  } else {
+    setImgArray(data.value);
+  }
+};
+
+
+  
+
+
 	return (
 		<>
 			<div className="ContentArea">
@@ -32,18 +50,21 @@ const ContentArea = () => {
 				<nav className="NavBar">
 					<ul>
 						<li>
-							<a href="#">Recently added</a>
+							<a onClick={handleTabClick} href="#">
+								Recently added
+							</a>
 						</li>
 						<li>
-							<a href="#">favourites</a>
+							<a onClick={handleTabClick} href="#">
+								favourites
+							</a>
 						</li>
 					</ul>
 				</nav>
 
 				<div className="photoGrid">
 					{imgArray.map((item: any) => (
-						<div className="imageCard"
-            key={item.id}>
+						<div className="imageCard" key={item.id}>
 							<img
 								onClick={handleClick}
 								id={item.id}
