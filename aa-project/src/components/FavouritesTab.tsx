@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { setSelected } from '../redux/dataSlice';
+import { setSelectedImage } from '../redux/dataSlice';
 
 const FavouritesTab = () => {
 
@@ -21,7 +20,8 @@ const FavouritesTab = () => {
 	};
 
   const handleClick = (e: any) => {
-		dispatch(setSelected(e.target.id));
+		const selectedImage = data.value.find((item: any) => item.id === e.target.id);
+		dispatch(setSelectedImage(selectedImage));
 	};
 
 	return (
